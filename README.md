@@ -49,6 +49,111 @@ we extracted key DSP features from cough audio signals to classify between COVID
 - Understanding basic signal features like energy and zero crossing rate  
 - Structuring a mini project from scratch
 
+## Output 
+1. Dataset Summary
+disp(countEachLabel(ads));
+
+
+What you see: A table listing each class (Covid, Tuberculosis, Healthy) and the number of WAV files in that class.
+
+Why it matters: It tells you if your dataset is balanced or not, which is important for classifier performance.
+
+Example output:
+
+Label	Count
+Covid	50
+Tuberculosis	40
+Healthy	60
+2. Classification Accuracy
+disp(['Classification Accuracy: ', num2str(accuracy,'%.2f'), '%']);
+
+
+What you see: A single number, e.g., Classification Accuracy: 87.50%.
+
+What it means: The percentage of test audio files correctly classified by your Random Forest (TreeBagger) model.
+
+Key point: Accuracy alone doesn’t tell you which classes are misclassified; that’s where the confusion chart comes in.
+
+3. Confusion Chart
+confusionchart(YTest, YPred);
+
+
+What you see: A grid showing true labels vs predicted labels.
+
+Example:
+
+	Pred: Covid	Pred: TB	Pred: Healthy
+True: Covid	45	3	2
+True: TB	4	35	1
+True: Healthy	0	2	58
+
+How to read:
+
+Rows = actual labels
+
+Columns = predicted labels
+
+Diagonal numbers are correct predictions; off-diagonal are misclassifications.
+
+4. Predicted Class for a Single File
+disp(['Predicted Class: ', char(YPred)]);
+
+
+What you see: A single label, e.g., Predicted Class: Covid.
+
+What it means: When you select an audio file in the interactive demo, this tells you how the model classified that specific cough.
+
+5. DSP Visualizations
+
+When you run the interactive demo, MATLAB opens a figure with 3 subplots:
+
+Waveform (Time-domain)
+
+Shows amplitude vs time.
+
+The Zero Crossing Rate (ZCR) is displayed in the title. High ZCR → noisy signal.
+
+FFT (Frequency-domain)
+
+Shows magnitude vs frequency.
+
+Red line = Spectral Centroid (average “center of mass” of frequencies)
+
+Green dashed lines = Spectral Bandwidth (spread of frequencies)
+
+Spectrogram (Time-Frequency)
+
+Shows how frequency content changes over time.
+
+Brighter areas = higher energy.
+
+Title shows the predicted class.
+
+6. Feature Vector Output
+
+Inside the code, each audio file is converted into a feature vector:
+
+feat = [zcr, specCentroid, specBandwidth, mfccMean];
+
+
+Length: Depends on MFCC coefficients (13 in your code) plus 3 time/frequency features → vector of size 1 × 16.
+
+Purpose: This vector is what the Random Forest uses to classify the cough.
+
+Summary
+
+Dataset summary: Shows class distribution.
+
+Accuracy: Overall model correctness on test set.
+
+Confusion chart: Shows which classes are confused.
+
+Predicted class: For any single audio file.
+
+DSP plots: Waveform, FFT, Spectrogram – visualizes the cough.
+
+Feature vector: Numeric representation used for classification.
+
 
 ## 📈 Future Plans
 
