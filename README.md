@@ -32,7 +32,7 @@ This is a simple but practical project to explore how DSP can be used in the med
 DSP_Project
 ├── main.m # MATLAB file with full project code
 └── README.md # Project documentation
-
+we extracted key DSP features from cough audio signals to classify between COVID, Tuberculosis, and Healthy cases. We computed time-domain features like Zero Crossing Rate (ZCR) to capture signal noisiness, frequency-domain features such as Spectral Centroid and Bandwidth to characterize the energy distribution, and cepstral features using MFCCs to model vocal tract characteristics. These features together provide a compact representation of cough sounds that improves classifier accuracy.
 
 ## ⚡ How to Run
 
